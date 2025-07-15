@@ -8,7 +8,7 @@ const secciones: Record<TipoPlato, string> = {
 };
 
 export default function App() {
-  const menu = useMenu();
+  const { menu, atencion, motivo } = useMenu(); // 👈 importante
 
   const grupos = menu.reduce<Record<TipoPlato, Plato[]>>(
     (acc, plato) => {
@@ -25,6 +25,20 @@ export default function App() {
     year: "numeric",
   }).format(new Date());
 
+  // 👇 Mostrar mensaje si no hay atención
+  if (!atencion) {
+    return (
+      <div className="min-h-screen flex flex-col justify-center items-center bg-[#fff4f4] text-[#c0392b] text-center p-8">
+        <h1 className="text-4xl font-bold mb-4">🚫 Hoy no hay atención</h1>
+        <p className="text-lg font-bold">{motivo || "Vuelve mañana para disfrutar nuestro menú 😋"}</p>
+        <footer className="mt-12 text-sm text-gray-500">
+          Restaurante Rafita - {hoy}
+        </footer>
+      </div>
+    );
+  }
+
+  // 👇 Vista normal si hay atención
   return (
     <div className="min-h-screen bg-[#fef9f4] text-[#4a2f27] font-sans">
       {/* Franja superior con degradado */}
