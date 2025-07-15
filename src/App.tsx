@@ -56,6 +56,31 @@ export default function App() {
           🍽️ Menú del Día
         </h1>
         <p className="text-center text-sm mt-1 italic">{hoy}</p>
+
+        <div className="flex justify-center gap-4 mt-4">
+          {/* Botón de copiar */}
+          <button
+            onClick={() => {
+              navigator.clipboard.writeText(window.location.href);
+              alert("📋 Enlace copiado al portapapeles");
+            }}
+            className="bg-[#c0392b] text-white px-4 py-2 rounded hover:bg-[#a93226] transition"
+          >
+            📋 Copiar enlace
+          </button>
+
+          {/* WhatsApp */}
+          <a
+            href={`https://wa.me/?text=${encodeURIComponent(
+              "¡Mira el menú de hoy! 🍽️ " + window.location.href
+            )}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition"
+          >
+            🟢 Compartir por WhatsApp
+          </a>
+        </div>
       </header>
 
       {/* Información de contacto */}
